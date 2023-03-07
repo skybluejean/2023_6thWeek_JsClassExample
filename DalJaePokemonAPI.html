@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" alt="">
+  </div>
+  <!-- <h1>버전</h1>
+  <h1>도감번호</h1>
+  <h1>이름</h1>
+  <h1>도감번호</h1> -->
+
+  <main id="main">
+    <ul id="pkList">
+
+    </ul>
+    <section id="container">
+      <div></div>
+      <div></div>
+      <div></div>
+    </section>
+  </main>
+
+
+
+
+  <script>
+    const root = document.getElementById('root')
+    
+    // const xhr = new XMLHttpRequest();
+    // // const rootUrl = 'https://pokeapi.co/api/v2/' // rootUrl
+    // const _URL = 'https://pokeapi.co/api/v2/' // rootUrl
+    // // const _URL = 'https://pokeapi.co/api/v2/pokemon'
+    // xhr.open('GET',_URL)
+    // xhr.send();
+    // xhr.addEventListener("load",function(){     //rootUrl부분
+    //   console.log(xhr.response)
+    //   console.log("--------------------------------------------")
+    //   const _PokeData = JSON.parse(xhr.response)
+      
+    //   let kids = Object.keys(_PokeData)
+    //   console.dir(kids.length)
+    //   let values = Object.values(_PokeData)
+    //   for(let i=0;i<kids.length;i++){
+        
+    //     const h1 = document.createElement('h1')
+    //     h1.textContent = kids[i]+" : "+values[i]
+    //     root.appendChild(h1)
+    //   }
+    //   console.dir(_PokeData) //루트 URL부분 콘솔dir
+    // })
+    
+    const xhr1 = new XMLHttpRequest();
+    const _URLDex = 'https://pokeapi.co/api/v2/pokedex/1' // rootUrl
+    
+    xhr1.open('GET',_URLDex)
+    xhr1.send();
+    xhr1.addEventListener("load",function(){     //rootUrl부분
+      console.log(xhr1.response)
+      console.log("--------------------------------------------")
+      const _PokeData = JSON.parse(xhr1.response)
+      
+      // const h1 = document.createElement('h1')
+      // h1.textContent = _PokeData.name
+      // root.appendChild(h1)
+      console.dir(_PokeData) //pokedex부분 콘솔dir
+    })
+    const xhr2 = new XMLHttpRequest();
+    const _URLMon = 'https://pokeapi.co/api/v2/pokemon/1' // rootUrl
+    
+    xhr2.open('GET',_URLMon)
+    xhr2.send();
+    xhr2.addEventListener("load",function(){     //rootUrl부분
+      console.log(xhr2.response)
+      console.log("--------------------------------------------")
+      const _PokeData = JSON.parse(xhr2.response)
+      
+      // const h1 = document.createElement('h1')
+      // h1.textContent = _PokeData.name
+      // root.appendChild(h1)
+      console.dir(_PokeData) //pokedex부분 콘솔dir
+
+
+      const xhr3 = new XMLHttpRequest();
+      const urlName = 'https://pokeapi.co/api/v2';
+      console.dir(urlName);
+   
+
+
+    //////포켓몬 사진
+    //////포켓몬 이름
+    /////포켓몬 넘버링
+    xhr3.open('GET',urlName);
+    xhr3.send();
+    xhr3.addEventListener("load",function(){     //rootUrl부분
+      console.log(xhr3.response)
+      console.log("--------------------------------------------")
+      const _PokeData = JSON.parse(xhr3.response)
+      
+      // const h1 = document.createElement('h1')
+      // h1.textContent = _PokeData.name
+      // root.appendChild(h1)
+      console.dir(_PokeData.pokedex) //pokedex부분 콘솔dir
+    })
+
+
+    })
+
+    // console.dir(_URL)
+    
+    // console.dir(root)
+
+
+
+    ///////////////////////////////////////////////////////////////
+
+    const mainContainer = document.querySelector('#main');
+    const pkList = document.querySelector('#pkList');
+    const pkInfo = document.querySelector('#container');
+    const listArr = document.createElement('li');
+   listArr.textContent = '';
+
+
+
+
+  </script>
+</body>
+</html>
