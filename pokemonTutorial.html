@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokemon API</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body{
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 100px;
+    }
+    button{
+      width: 100px;
+      height: 18px;
+      background-color: lightpink;
+    }
+  </style>
+</head>
+
+
+
+<body>
+  <main>
+    <div class="searchBox">
+      <input id="pokemonName" type="text" placeholder="pokemon name">
+      <button id="search">Search it!</button>
+    </div>
+
+    <div class="pokemonBox">
+      <div>
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png" alt="ditto">
+      </div>
+      <div class="pokemonInfo">
+        <h1>Ditto</h1>
+        <p>Description</p>
+      </div>
+    </div>
+  </main>
+
+
+  <script>
+
+    const pokemonName = document.querySelector('#pokemonName');
+    const search = document.querySelector('#search');
+    search.addEventListener('click',getPokemon);
+
+
+
+    function getPokemon(){
+
+      fetch('https://pokeapi.co/api/v2/pokemon/ditto').then((response) => response.json()).then((data) => {
+        console.log(data);
+      }).catch((err) => {
+        console.log('pokemon not found', err);
+      })
+    }
+    getPokemon()
+
+
+  </script>
+
+
+
+
+</body>
+</html>
