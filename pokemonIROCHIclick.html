@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+  </div>
+  <script>
+    //root 선언
+    const root = document.getElementById('root')
+
+
+    //기능 모음 ----------------------------------------------------------------------------
+    function makeTag (parentName, tagName, addNum) {
+      for(let i=0;i<addNum;i++){
+        const createTag = document.createElement(tagName)
+        parentName.appendChild(createTag)
+      }
+    }
+
+    //태그에 선택자 입력
+    function setAttri (parentName, tagStyle, tagInnerText) {
+      parentName.setAttribute(tagStyle,tagInnerText)
+    }
+    
+    //태그에 글자 입력(innertext, innerHTML)
+    function tagInnerText (childName, addInnerText){
+      childName.innerText = addInnerText
+    }
+
+    function tagInnerHTML (childName, addInnerHTML){
+      childName.innerHTML = addInnerHTML
+    }
+    
+    //이미지 소스url, alt 넣기
+    function imgScrAlt(parentName, addSrc, addAlt){
+      const imgElement = document.createElement('img')
+      const imgCreate = parentName.appendChild(imgElement)
+      imgCreate.src = addSrc
+      imgCreate.alt = addAlt
+    }
+
+
+    //기능모음 끝------------------------------------------------------------------------------
+
+
+
+    // makeTag(root,'img',1)
+    // imgScrAlt(root.children[0],'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png','이상해')
+    
+    
+    
+    const addNum = 1010;
+    const xhr = new XMLHttpRequest();
+    const URL = 'https://pokeapi.co/api/v2/pokemon/';
+    xhr.open('get',URL);
+    xhr.send();
+    // console.log(xhr.response) 작동을 안하는 이유 load때문인거같음
+    xhr.addEventListener('load',function(){
+      const pokeData = JSON.parse(xhr.response)
+      const makeul = document.createElement('ul')
+      root.appendChild(makeul)
+      root.children[0].appendChild(document.createElement('li'))
+
+      //for문 시작
+      for(let i=0;i<addNum;i++){
+          const makeli = document.createElement('li')
+          root.children[0].appendChild(makeli)
+          const pokeimg = imgScrAlt(root.children[0].children[i],`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i+1}.png`,'일단 적어')
+        }
+        //for문 끝
+
+
+        //ul 스타일 시작
+        const ul = document.querySelector('ul')
+        ul.style.listStyleType="none";
+        ul.style.display = "flex"
+        ul.style.flexWrap = "wrap"
+        //ul 스타일 끝
+
+        
+        //이로치 스위치 시작
+        let shinyCount=true;
+        for(let i=0;i<addNum;i++){
+          root.children[0].children[i].children[0].addEventListener('click',function (){
+            if(shinyCount===true){
+              root.children[0].children[i].children[0].src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i+1}.png`
+              shinyCount = false;
+            } else {
+              root.children[0].children[i].children[0].src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${i+1}.png`
+              shinyCount=true;
+            }
+        })
+        }   
+        //이로치 스위치 끝
+
+
+        }) //addevent, function 끝
+      
+      
+
+        
+        // console.log(xhr.response)
+        
+        
+      
+      // console.dir(xhr)
+      // console.dir(pokeData)
+
+        
+
+
+
+    //한국어 이상해씨 이름 주소
+  const URLLanguage = 'https://pokeapi.co/api/v2/pokemon-species/aegislash'
+  xhr.open('get',URLLanguage)
+  xhr.send();
+  xhr.addEventListener('load',function(){
+    const pokeDate = JSON.parse(xhr.response)
+    // console.log(pokeDate.names[2].name);
+    for(let i=0;i<addNum;i++){
+      
+    }
+  })
+  </script>
+</body>
+</html>
