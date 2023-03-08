@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <style>
+      *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      }
+      header{
+        width: 100vw;
+        height: 200px;
+        background-color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      header > button{
+        width: 200px;
+        height: 50px;
+        margin: 10px;
+      }
+    </style>
+</head>
+
+
+<body>
+  <header>
+    <button id="add-button">make tag!</button>
+    <button id="render-button">render!</button>
+  </header> 
+  <div id="root"></div>
+
+  <script>
+    const addButton = document.getElementById('add-button');
+    const renderButton = documment.getElementById('render-button');
+    const root = document.getElementById('root');
+
+    const tags = [];
+
+    let count = 0;
+    addButton.addEventListener('click',function(){
+      count++;
+      console.log("count 변수 값 : ", count);
+      console.log("배열의 길이 값", tags.length);
+      const tag = document.createElement('div');
+      tag.style.width = '100px';
+      tag.style.height = '100px';
+      tag.style.backgroundColor = 'red';
+      tag.textContent = count + "번째 태그";
+      tags.push(tag);
+
+      console.log(tags);
+    })
+  </script>
+
+
+</body>
+</html>

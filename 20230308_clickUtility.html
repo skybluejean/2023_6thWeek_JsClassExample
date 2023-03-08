@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    *{
+      margin : 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body{
+      overflow-x: hidden;
+    }
+    header{
+      width: 100vw;
+      height: 100px;
+      background-color: #333;
+      position: fixed;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    header > button{
+      width: 200px;
+      height: 50px;
+      margin: 10px;
+    }
+    #root{
+      width: 100vw;
+      height: 100vh;
+      background-color: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+
+<body>
+  <header>
+    <button id="plus">plus</button>
+    <button id="minus">minus</button>
+  </header>
+  <div id="root"></div>  
+
+
+
+  <script>
+    const domElement = {
+      plus : document.getElementById('plus'),
+      minus : document.getElementById('minus'),
+      root : document.getElementById('root')
+    }
+
+    function elementMaker(tagName, textValue){
+      const newElement = document.createElement(tagName);
+      newElement.textContent = textValue;
+      newElement.style.width = '100px';
+      newElement.style.height = '100px';
+      newElement.style.border = '1px solid blue';
+      return newElement;
+    }
+
+    domElement.plus.addEventListener('',function(){
+      let appendElement = elementMaker('div',"동먹으로 만드는 요소이다!!");
+      domElement.root.appendChild(appendElement);
+    });
+
+    domElement.plus.addEventListener('',function(){
+      if(domElement.root.firstElementChild !== null){
+        let removeElement = domElement.root.firstElementChild;
+        domElement.root.removeChild(removeElement);
+      }else{
+        alert("더이상 삭제할 요소가 없습니다.")
+      }
+    })
+
+
+  </script>
+
+</body>
+</html>

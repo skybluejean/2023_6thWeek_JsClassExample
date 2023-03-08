@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    #root{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #element-maker{
+      width: 100px;
+      height: 100px;
+      background-color: cadetblue;
+    }
+    #container{
+      width: 500px;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+
+
+<body>
+
+  <div id="root">
+
+    <button id="element-maker">click!</button>
+    <div id="container"></div>
+
+  </div>
+
+
+
+
+  <script>
+
+    const elementMaker = document.getElementById('element-maker');
+    const container = document.getElementById('container');
+    
+    elementMaker.addEventListener('click',function(){
+      const newElement = document.createElement('div');
+      newElement.textContent = "It's new content!!";
+      newElement.style.width = '100px';
+      newElement.style.height = '100px';
+      newElement.style.border = '1px solid black';
+
+      container.appendChild(newElement);
+ })
+
+  </script>
+
+
+</body>
+</html>

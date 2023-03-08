@@ -10,7 +10,7 @@
   <div id="root"></div>
   <img src="" alt="">
   <script>
-    const root = document.getElementById('root')
+    const root = document.getElementById('root');
     const xhr = new XMLHttpRequest();
     const URL = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
     xhr.open('get',URL);
@@ -20,7 +20,7 @@
       const pokeData = JSON.parse(xhr.response)
       const makeul = document.createElement('ul')
       root.appendChild(makeul)
-      const addNum = 10;
+      const addNum = 1010;
       for(let i=0;i<addNum;i++){
         const makeli = document.createElement('li')
         root.children[0].appendChild(makeli)
@@ -39,6 +39,7 @@
 
       console.log(pokeData)
       console.dir(pokeData)
+      console.dir(root);
 
 
 
