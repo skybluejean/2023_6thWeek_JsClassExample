@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+
+<body>
+  
+  <div id="root"></div>
+  <img src="" alt="">
+  <script>
+    const root = document.getElementById('root')
+    const xhr = new XMLHttpRequest();
+    const URL = 'https://pokeapi.co/api/v2/pokemon/ditto';
+    xhr.open('get',URL);
+    xhr.send();
+    // console.log(xhr.response) 작동을 안하는 이유 load때문인거같음
+    xhr.addEventListener('load',function(){
+      const pokeData = JSON.parse(xhr.response)
+      const makeul = document.createElement('ul')
+      root.appendChild(makeul)
+      const addNum = 1010;
+      for(let i=0;i<addNum;i++){
+        const makeli = document.createElement('li')
+        root.children[0].appendChild(makeli)
+        root.children[0].children[i].innerHTML=`<img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i+1}.png' alt=''>`
+      }
+      root.children[0].style.listStyleType="none";
+      // console.log(xhr.response)
+
+
+      const ul = document.querySelector('ul')
+      ul.style.display = "flex"
+      ul.style.flexWrap = "wrap"
+
+      console.log(pokeData)
+
+    })
+  </script>
+</body>
+</html>

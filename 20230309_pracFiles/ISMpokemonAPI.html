@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+  </div>
+  <script>
+    //root 선언
+    const root = document.getElementById('root')
+
+
+    //기능 모음 ----------------------------------------------------------------------------
+    function makeTag (parentName, tagName, addNum) {
+      for(let i=0;i<addNum;i++){
+        const createTag = document.createElement(tagName)
+        parentName.appendChild(createTag)
+      }
+    }
+
+    //태그에 선택자 입력
+    function setAttri (parentName, tagStyle, tagInnerText) {
+      parentName.setAttribute(tagStyle,tagInnerText)
+    }
+    
+    //태그에 글자 입력(innertext, innerHTML)
+    function tagInnerText (childName, addInnerText){
+      childName.innerText = addInnerText
+    }
+
+    function tagInnerHTML (childName, addInnerHTML){
+      childName.innerHTML = addInnerHTML
+    }
+    
+    //이미지 소스url, alt 넣기
+    function imgScrAlt(parentName, addSrc, addAlt){
+      const imgElement = document.createElement('img')
+      const imgCreate = parentName.appendChild(imgElement)
+      imgCreate.src = addSrc
+      imgCreate.alt = addAlt
+    }
+
+
+    //기능모음 끝------------------------------------------------------------------------------
+    
+    
+
+    //html mark up 부분 시작
+    makeTag(root,'button',1);
+    makeTag(root,'ul',1);
+    setAttri(root.children[0],'id','shiny-button')
+    //html mark up 부분 끝
+
+    //선택자 지정 시작
+    const selectAll = [
+      ul = document.querySelector('ul'),
+      shinyButton = document.getElementById('shiny-button'),
+      shinyCount=true,
+      //포켓몬 수 지정은 여기서 할 것
+      addPokeNum = 40,
+      //li내 이미지 위치(한꺼번에 바뀌게끔 임시로 만듦)
+      liImgLocate = 0,
+    ]
+    //선택자 지정 끝
+    
+    tagInnerText(shinyButton,"이로치") //버튼 텍스트 입력
+
+
+    //포켓몬 수 지정하면 알아서 li를 늘리기
+    makeTag(ul,'li',addPokeNum);
+
+
+
+    //처음 포켓몬 이미지 불러오는 for문 시작
+    for(let i=0;i<addPokeNum;i++){
+        const pokeimg = imgScrAlt(ul.children[i],`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i+1}.png`,'일단 적어')
+      }
+    //처음 포켓몬 이미지 불러오는 for문 끝
+
+
+    //ul 스타일 시작
+    ul.style.listStyleType="none";
+    ul.style.display = "flex";
+    ul.style.flexWrap = "wrap";
+    //ul 스타일 끝
+
+        
+    //이로치 개별 스위치 시작
+    for(let i=0;i<addPokeNum;i++){
+      ul.children[i].children[liImgLocate].addEventListener('click',function (){
+        if(shinyCount===true){
+          ul.children[i].children[liImgLocate].src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${i+1}.png`
+          shinyCount = false;
+        } else {
+          ul.children[i].children[liImgLocate].src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i+1}.png`
+          shinyCount=true;
+        }
+      }) // for문 안의 addeventlistener 끝
+      }  // for문 끝
+      //이로치 개별 스위치 끝
+        
+
+    //이로치 전체 스위치 시작
+    //이로치 전체 스위치 반복문 시작
+    shinyButton.addEventListener('click',function(){
+      if(shinyCount===true){
+        for(let i=0;i<addPokeNum;i++){
+          ul.children[i].children[liImgLocate].src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${i+1}.png`
+        } 
+        shinyCount=false;
+      } else {
+        for(let i=0;i<addPokeNum;i++){
+        ul.children[i].children[liImgLocate].src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i+1}.png`
+      } 
+        shinyCount=true;
+      } //if문 끝
+    }) //이로치 전체 스위치 반복문 끝
+    //이로치 전체 스위치 끝
+
+
+
+
+
+
+    //한국어 포켓몬 이름
+    const pokeNameData = [];
+    let numbers = 500;
+    for(let i=1;i<numbers;i++){
+      const xhr = new XMLHttpRequest;
+      const URL = `https://pokeapi.co/api/v2/pokemon-species/${i}`;
+      xhr.open('get',URL);
+      xhr.send();
+      xhr.addEventListener('load',function (){
+        const pokeData = JSON.parse(xhr.response)
+
+        pokeNameData.push([pokeData.id,pokeData.names[2].name])
+        pokeNameData.sort((a, b) => a[0]-b[0])
+      })
+    } //function안의 for문 끝부분
+    
+    console.log(typeof(pokeNameData))
+    console.log(pokeNameData)
+
+    Object.values(pokeNameData)
+    makeTag(ul.children[0],"div",1)
+    ul.children[0].children[0].addEventListener('click',function(){
+      tagInnerText(ul.children[0].children[1],pokeNameData[0])
+    })
+      </script>
+</body>
+</html>

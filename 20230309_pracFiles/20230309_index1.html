@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+
+
+<body>
+
+  <div id="root">
+
+
+  </div>
+
+<script>
+  /*
+  const example = {
+    a : 'name',
+    b : 1,
+    c : 'home'
+  }
+  const arr = example[keys];
+  console.log(arr);
+  */
+
+  const root = document.getElementById('root');
+
+
+  function elementMaker(tagName,props,key,child,children){
+    const element = document.createElement(tagName);
+    Object.keys(props).forEach(function(key){
+      element[key] = props[key];
+    });
+    console.log(element[key]);
+    console.dir(Object.keys(props));
+
+    if(children.length > 0){
+      children.forEach(function(child){
+        if(typeof(child) === "string"){
+          child = document.createTextNode(child);
+        }
+        element.appendChild(child);
+      });
+    }
+    return element;
+  }
+
+  const file = {
+    name : 'jin',
+    age : 24,
+    home : 'daejeon'
+  }
+
+  const example = elementMaker('div', file, file.key)
+
+  ///element또는 tagName 은 div, ul, main 등등 태그들
+  ///props는 객체 ==> const props = { a : 'first', al : 1, be : 'second', be : 2}
+  ///forEach(function(){});
+  ///children.forEach(function(){});
+  //childsms 문자열(?) 텍스트를 가리키는 걸로 추정
+  //child는 자식요소
+
+</script>
+
+
+</body>
+</html>
